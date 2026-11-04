@@ -1,0 +1,27 @@
+<div class="drop-zone" 
+     [class.dragging]="isDragging" 
+     [class.has-file]="file"
+     [class.disabled]="isDisabled"
+     (click)="fileInput.click()">
+  
+  <input type="file" #fileInput hidden (change)="onFileSelected($event)">
+
+  <!-- Vista cuando no hay archivo -->
+  <div class="upload-content" *ngIf="!file">
+    <p class="label">{{ label }}</p>
+    <p class="hint">{{ hint }}</p>
+    <button type="button" class="btn-seleccionar">Seleccionar Archivo</button>
+  </div>
+
+  <!-- Vista cuando hay un archivo cargado -->
+  <div class="file-preview" *ngIf="file">
+    <img *ngIf="previewUrl" [src]="previewUrl" alt="Vista previa">
+    <div class="file-info" *ngIf="!previewUrl">
+      <i class="fas fa-file-alt"></i>
+      <span>{{ file.name }}</span>
+    </div>
+    <button type="button" class="btn-remove" (click)="removeFile($event)">
+      <i class="fas fa-times"></i> Remover
+    </button>
+  </div>
+</div>

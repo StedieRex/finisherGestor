@@ -1,0 +1,14 @@
+<div style="padding: 50px; max-width: 500px;" [formGroup]="testForm">
+  <h2>Prueba de Drag & Drop</h2>
+  
+  <app-drag-drop-upload 
+    formControlName="miArchivoDragAndDrop"
+    label="Arrastra el Banner del evento aquí"
+    hint="Formatos: PNG, JPG recomendados. Max: 5MB">
+  </app-drag-drop-upload>
+
+  <div style="margin-top: 20px; background: #eee; padding: 10px;">
+    Estado del formControl: 
+    <strong>{{ testForm.get('miArchivoDragAndDrop')?.value ? testForm.get('miArchivoDragAndDrop')?.value?.name : 'Vacío' }}</strong>
+  </div>
+</div>
