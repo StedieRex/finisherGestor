@@ -1,1 +1,10 @@
-<p>sidebar works!</p>
+<aside class="sidebar-container">
+  <ul class="nav-list">
+    <li *ngFor="let seccion of secciones" 
+        class="nav-item" 
+        [class.active]="seccionActiva === seccion.id"
+        (click)="seleccionar(seccion.id)">
+      <span class="nav-text">{{ seccion.titulo }}</span>
+    </li>
+  </ul>
+</aside>

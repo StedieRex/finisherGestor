@@ -1,14 +1,110 @@
-<div style="padding: 50px; max-width: 500px;" [formGroup]="testForm">
-  <h2>Prueba de Drag & Drop</h2>
+<div class="layout-wrapper">
   
-  <app-drag-drop-upload 
-    formControlName="miArchivoDragAndDrop"
-    label="Arrastra el Banner del evento aquí"
-    hint="Formatos: PNG, JPG recomendados. Max: 5MB">
-  </app-drag-drop-upload>
+  <app-sidebar 
+    [secciones]="secciones" 
+    [seccionActiva]="seccionActiva"
+    (seccionCambiada)="cambiarSeccion($event)">
+  </app-sidebar>
 
-  <div style="margin-top: 20px; background: #eee; padding: 10px;">
-    Estado del formControl: 
-    <strong>{{ testForm.get('miArchivoDragAndDrop')?.value ? testForm.get('miArchivoDragAndDrop')?.value?.name : 'Vacío' }}</strong>
-  </div>
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Nuevo Evento Deportivo</h1>
+      <p>Completa todas las secciones para publicar tu evento. Los campos marcados con <span>*</span> son obligatorios.</p>
+    </header>
+
+    <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()" class="accordion-container">
+      
+      <!-- Iteramos sobre las secciones -->
+      <div *ngFor="let seccion of secciones" 
+           class="accordion-card"
+           [class.active]="seccionActiva === seccion.id">
+        
+        <!-- Cabecera del Acordeón -->
+        <div class="accordion-header" (click)="cambiarSeccion(seccion.id)">
+          <div class="header-title">
+            <i [class]="seccion.icono"></i>
+            <div>
+              <h3>{{ seccion.titulo }}</h3>
+              <p>{{ seccion.subtitulo }}</p>
+            </div>
+          </div>
+          <i class="fas" [ngClass]="seccionActiva === seccion.id ? 'fa-chevron-down' : 'fa-chevron-left'"></i>
+        </div>
+
+        <!-- Cuerpo del Acordeón -->
+        <div class="accordion-body" *ngIf="seccionActiva === seccion.id">
+          
+          <!-- SECCIÓN 1: DATOS GENERALES -->
+          <ng-container *ngIf="seccion.id === 'datosGenerales'" formGroupName="datosGenerales">
+            
+            <div class="grid-2-cols mb-3">
+              <app-drag-drop-upload formControlName="banner" label="Arrastra tu imagen aquí (Banner)" hint="PNG, JPG hasta 5MB - Tamaño recomendado: 1200x240px"></app-drag-drop-upload>
+              <app-drag-drop-upload formControlName="thumbnail" label="Arrastra tu imagen aquí (Thumbnail)" hint="PNG, JPG hasta 5MB - Tamaño recomendado: 1200x720px"></app-drag-drop-upload>
+            </div>
+
+            <div class="grid-2-cols mb-3">
+              <div class="form-group">
+                <label>Nombre del Evento *</label>
+                <input type="text" formControlName="nombreEvento" class="form-control" placeholder="Ej. Gran Maratón">
+              </div>
+              <div class="form-group">
+                <label>Grupo Organizador *</label>
+                <input type="text" formControlName="grupoOrganizador" class="form-control">
+              </div>
+            </div>
+
+            <div class="grid-4-cols mb-3">
+              <div class="form-group">
+                <label>Tipo del Evento *</label>
+                <select formControlName="tipoEvento" class="form-control">
+                  <option value="">Seleccione tipo</option>
+                  <option *ngFor="let tipo of catalogos.tiposEvento" [value]="tipo">{{ tipo }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Cupo</label>
+                <input type="number" formControlName="cupo" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Fecha *</label>
+                <input type="date" formControlName="fecha" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Hora de Arranque *</label>
+                <input type="time" formControlName="horaArranque" class="form-control">
+              </div>
+            </div>
+
+            <div class="grid-2-cols mb-3">
+              <div class="form-group">
+                <label>Lugar *</label>
+                <textarea formControlName="lugar" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Ubicación de la ZT</label>
+                <textarea formControlName="ubicacionZt" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline">Limpiar</button>
+              <button type="button" class="btn btn-primary" (click)="cambiarSeccion('informacionAtletas')">Siguiente ➔</button>
+            </div>
+
+          </ng-container>
+
+          <!-- EL RESTO DE LAS SECCIONES SE AGREGARÁN AQUÍ DESPUÉS -->
+          <ng-container *ngIf="seccion.id !== 'datosGenerales'">
+            <p style="padding: 20px; color: #64748b;">(Campos de {{seccion.titulo}} en construcción)</p>
+          </ng-container>
+
+        </div>
+      </div>
+
+      <div class="form-submit-area" *ngIf="seccionActiva === 'informacionAdicional'">
+        <button type="submit" class="btn btn-success btn-lg">💾 Crear Evento</button>
+      </div>
+
+    </form>
+  </main>
 </div>
