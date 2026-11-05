@@ -1,0 +1,7 @@
+{
+  "eventos": [],
+  "catalogos": {
+    "tiposEvento": ["Carrera", "Triatlón", "Ciclismo", "Natación"],
+    "modalidades": ["Presencial", "Virtual", "Híbrido"]
+  }
+}
