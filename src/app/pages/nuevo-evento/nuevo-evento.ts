@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SidebarComponent } from '../../components/sidebar/sidebar';
 import { DragDropUploadComponent } from '../../components/drag-drop-upload/drag-drop-upload';
 import { EventoService } from '../../services/evento.service'; // Asegúrate de tener la ruta correcta
@@ -42,6 +42,66 @@ export class NuevoEventoComponent implements OnInit {
     });
   }
 
+  // --- GETTERS PARA LOS FORMARRAYS ---
+  get splits(): FormArray {
+    return this.eventoForm.get('datosGenerales.categoriasDistancias') as FormArray;
+  }
+
+  getRamas(splitIndex: number): FormArray {
+    return this.splits.at(splitIndex).get('ramas') as FormArray;
+  }
+
+  getCategorias(splitIndex: number, ramaIndex: number): FormArray {
+    return this.getRamas(splitIndex).at(ramaIndex).get('categorias') as FormArray;
+  }
+
+  // --- MÉTODOS PARA AGREGAR/ELIMINAR SPLITS ---
+  nuevoSplit(): FormGroup {
+    return this.fb.group({
+      nombre: ['', Validators.required],
+      ramas: this.fb.array([])
+    });
+  }
+
+  addSplit() {
+    this.splits.push(this.nuevoSplit());
+  }
+
+  removeSplit(index: number) {
+    this.splits.removeAt(index);
+  }
+
+  // --- MÉTODOS PARA AGREGAR/ELIMINAR RAMAS ---
+  nuevaRama(): FormGroup {
+    return this.fb.group({
+      nombre: ['', Validators.required],
+      categorias: this.fb.array([])
+    });
+  }
+
+  addRama(splitIndex: number) {
+    this.getRamas(splitIndex).push(this.nuevaRama());
+  }
+
+  removeRama(splitIndex: number, ramaIndex: number) {
+    this.getRamas(splitIndex).removeAt(ramaIndex);
+  }
+
+  // --- MÉTODOS PARA AGREGAR/ELIMINAR CATEGORÍAS ---
+  nuevaCategoria(): FormGroup {
+    return this.fb.group({
+      nombre: ['', Validators.required]
+    });
+  }
+
+  addCategoria(splitIndex: number, ramaIndex: number) {
+    this.getCategorias(splitIndex, ramaIndex).push(this.nuevaCategoria());
+  }
+
+  removeCategoria(splitIndex: number, ramaIndex: number, categoriaIndex: number) {
+    this.getCategorias(splitIndex, ramaIndex).removeAt(categoriaIndex);
+  }
+
   inicializarFormulario() {
     this.eventoForm = this.fb.group({
       datosGenerales: this.fb.group({
@@ -56,6 +116,7 @@ export class NuevoEventoComponent implements OnInit {
         lugar: ['', Validators.required],
         ubicacionZt: [''],
         modalidades: [''],
+        categoriasDistancias: this.fb.array([]),
         distanciasFile: [null],
         rutasFile: [null],
         premiacion: [''],

@@ -86,6 +86,70 @@
               </div>
             </div>
 
+            <!-- Nuevo Bloque: Modalidades, Categorías, y Archivos -->
+            <div class="grid-2-cols align-top mb-3">
+              
+              <!-- Columna Izquierda -->
+              <div class="left-column">
+                <div class="form-group mb-3">
+                  <label>Modalidades</label>
+                  <textarea formControlName="modalidades" class="form-control" rows="3" placeholder="Long Input |"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>Categorías y Distancias</label>
+                  <div formArrayName="categoriasDistancias" class="nested-arrays-container">
+                    
+                    <!-- Iteración de SPLITS -->
+                    <div *ngFor="let split of splits.controls; let i = index" [formGroupName]="i" class="split-card">
+                      <div class="split-header">
+                        <span class="badge-split">SPLIT</span>
+                        <input type="text" formControlName="nombre" class="form-control dark-input" placeholder="Input |">
+                        <button type="button" class="btn-close-red" (click)="removeSplit(i)"><i class="fas fa-times"></i></button>
+                      </div>
+                      
+                      <div class="split-body" formArrayName="ramas">
+                        <!-- Iteración de RAMAS -->
+                        <div *ngFor="let rama of getRamas(i).controls; let j = index" [formGroupName]="j" class="rama-card">
+                          <div class="rama-header">
+                            <span class="badge-rama">RAMA</span>
+                            <input type="text" formControlName="nombre" class="form-control" placeholder="Input |">
+                            <button type="button" class="btn-close-red" (click)="removeRama(i, j)"><i class="fas fa-times"></i></button>
+                          </div>
+                          
+                          <div class="rama-body" formArrayName="categorias">
+                            <!-- Iteración de CATEGORÍAS -->
+                            <div *ngFor="let cat of getCategorias(i, j).controls; let k = index" [formGroupName]="k" class="categoria-card">
+                              <span class="badge-cat">CATEGORÍA</span>
+                              <input type="text" formControlName="nombre" class="form-control" placeholder="Input |">
+                              <button type="button" class="btn-close-red" (click)="removeCategoria(i, j, k)"><i class="fas fa-times"></i></button>
+                            </div>
+                            <button type="button" class="btn-add btn-sm" (click)="addCategoria(i, j)">+ Agregar Categoría</button>
+                          </div>
+                        </div>
+                        <button type="button" class="btn-add mb-2" (click)="addRama(i)">+ Agregar Rama</button>
+                      </div>
+                    </div>
+                    
+                    <button type="button" class="btn-add btn-lg" (click)="addSplit()">+ Agregar Split</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Columna Derecha -->
+              <div class="right-column">
+                <div class="form-group mb-4">
+                  <label>Distancias</label>
+                  <app-drag-drop-upload formControlName="distanciasFile" label="Arrastra tu archivo aquí" hint="PNG, JPG, JPEG, DOC, DOCX, PDF hasta 5MB"></app-drag-drop-upload>
+                </div>
+                <div class="form-group mb-4">
+                  <label>Rutas</label>
+                  <app-drag-drop-upload formControlName="rutasFile" label="Arrastra tu archivo aquí" hint="PNG, JPG, JPEG, DOC, DOCX, PDF hasta 5MB"></app-drag-drop-upload>
+                </div>
+              </div>
+
+            </div>
+
             <div class="section-actions">
               <button type="button" class="btn btn-outline">Limpiar</button>
               <button type="button" class="btn btn-primary" (click)="cambiarSeccion('informacionAtletas')">Siguiente ➔</button>

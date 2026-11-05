@@ -129,3 +129,113 @@
   margin-top: 30px;
   text-align: right;
 }
+
+// Alineación superior para el grid de 2 columnas
+.align-top {
+  align-items: flex-start;
+  gap: 30px;
+}
+.mb-4 { margin-bottom: 25px; }
+
+// --- Estilos para FormArrays Anidados ---
+.nested-arrays-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+// SPLIT (Azul oscuro)
+.split-card {
+  border: 1px solid #c2d1e0;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  overflow: hidden;
+
+  .split-header {
+    background-color: #244199; // Azul del diseño
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .badge-split { color: #f59e0b; font-weight: bold; font-size: 13px; }
+    
+    .dark-input {
+      background: #1e3680;
+      border: 1px solid #192d6b;
+      color: white;
+      &::placeholder { color: #8ea4e6; }
+    }
+  }
+
+  .split-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+// RAMA (Blanco)
+.rama-card {
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 15px;
+
+  .rama-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+
+    .badge-rama { color: #3b82f6; font-weight: bold; font-size: 13px; }
+  }
+
+  .rama-body {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+// CATEGORÍA (Inputs anidados)
+.categoria-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+
+  .badge-cat { color: #475569; font-weight: bold; font-size: 12px; }
+}
+
+// --- Botones de acción anidados ---
+.btn-close-red {
+  background: none;
+  border: none;
+  color: #ef4444; // Rojo intenso
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  &:hover { transform: scale(1.1); color: #dc2626; }
+}
+
+.btn-add {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s;
+
+  &:hover { background: #1d4ed8; }
+  &.btn-sm { font-size: 12px; padding: 6px 12px; }
+  &.btn-lg { font-size: 14px; padding: 10px 20px; }
+}
