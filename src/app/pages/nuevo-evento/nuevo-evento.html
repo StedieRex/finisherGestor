@@ -324,7 +324,7 @@
               </div>
 
               <!-- Le decimos a Angular que usaremos el FormArray de datosGenerales -->
-              <div [formGroup]="eventoForm.get('datosGenerales')">
+              <div formGroupName="datosGenerales">
                 <div formArrayName="categoriasDistancias">
                   
                   <div *ngFor="let split of splits.controls; let i = index" [formGroupName]="i" class="split-cost-card mb-3">
