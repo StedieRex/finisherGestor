@@ -59,8 +59,31 @@ export class NuevoEventoComponent implements OnInit {
   nuevoSplit(): FormGroup {
     return this.fb.group({
       nombre: ['', Validators.required],
-      ramas: this.fb.array([])
+      ramas: this.fb.array([]),
+      // NUEVO: Cada split nace con al menos una fila de costos
+      fechasCostos: this.fb.array([ this.nuevaFechaCosto() ]) 
     });
+  }
+
+  // --- MÉTODOS PARA FECHAS Y COSTOS DE INSCRIPCIÓN ---
+  nuevaFechaCosto(): FormGroup {
+    return this.fb.group({
+      fechaInicio: ['', Validators.required],
+      fechaFin: ['', Validators.required],
+      costo: ['', Validators.required]
+    });
+  }
+
+  getFechasCostos(splitIndex: number): FormArray {
+    return this.splits.at(splitIndex).get('fechasCostos') as FormArray;
+  }
+
+  addFechaCosto(splitIndex: number) {
+    this.getFechasCostos(splitIndex).push(this.nuevaFechaCosto());
+  }
+
+  removeFechaCosto(splitIndex: number, costoIndex: number) {
+    this.getFechasCostos(splitIndex).removeAt(costoIndex);
   }
 
   addSplit() {
@@ -124,13 +147,54 @@ export class NuevoEventoComponent implements OnInit {
         notasImportantes: ['']
       }),
       // Más adelante llenaremos los controles de las otras secciones
-      informacionAtletas: this.fb.group({}),
-      inscripciones: this.fb.group({}),
+      informacionAtletas: this.fb.group({
+        // Ingreso de Bicicletas
+        ingresoBicicletasNoAplica: [false],
+        ingresoFecha: [''],
+        ingresoLugar: [''],
+        ingresoHoraInicial: [''],
+        ingresoHoraLimite: [''],
+        
+        // Guardaropa y Junta Previa
+        guardaropa: ['', Validators.required],
+        juntaPreviaNoAplica: [false],
+        juntaPrevia: [''],
+        
+        // Drafting
+        draftingNoAplica: [false],
+        drafting: [''],
+        
+        // Textos largos
+        abastecimientos: ['', Validators.required],
+        metaRecuperacion: ['', Validators.required],
+        jueces: ['', Validators.required],
+        
+        // Reglamento
+        reglamentoFile: [null],
+        reglamentoTexto: [''],
+        
+        // Tiempos Máximos
+        tiemposMaximosNoAplica: [false],
+        tiemposMaximosTexto: [''],
+        tiemposMaximosFile: [null],
+        
+        // Guía y Carta
+        guiaAtletaFile: [null],
+        cartaResponsivaFile: [null]
+      }),
+      inscripciones: this.fb.group({
+        afiliacion: ['', Validators.required],
+        lugares: ['', Validators.required],
+        formasPago: ['', Validators.required],
+        notasImportantes: [''] // Es independiente de las notas generales
+      }),
       paquetes: this.fb.group({}),
       reglasNormas: this.fb.group({}),
       informacionAdicional: this.fb.group({})
     });
   }
+
+  
 
   cambiarSeccion(id: string) {
     this.seccionActiva = id;

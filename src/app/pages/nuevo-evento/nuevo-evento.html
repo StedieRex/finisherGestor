@@ -150,9 +150,246 @@
 
             </div>
 
+            <!-- Bloque de Premiación -->
+            <div class="grid-2-cols align-top mb-3">
+              <div class="form-group">
+                <label>Premiación</label>
+                <textarea formControlName="premiacion" class="form-control" rows="5" placeholder="Long Input |"></textarea>
+              </div>
+              
+              <div class="form-group">
+                <label>Archivo de las Premiaciones</label>
+                <app-drag-drop-upload formControlName="premiacionFile" label="Arrastra tu archivo aquí" hint="PNG, JPG, JPEG, DOC, DOCX, PDF hasta 5MB"></app-drag-drop-upload>
+              </div>
+            </div>
+
+            <!-- Línea separadora -->
+            <hr class="section-divider">
+
+            <!-- Notas Importantes -->
+            <div class="form-group mb-3">
+              <label>Notas Importantes</label>
+              <textarea formControlName="notasImportantes" class="form-control" rows="3" placeholder="Long Input |"></textarea>
+            </div>
+
             <div class="section-actions">
               <button type="button" class="btn btn-outline">Limpiar</button>
               <button type="button" class="btn btn-primary" (click)="cambiarSeccion('informacionAtletas')">Siguiente ➔</button>
+            </div>
+
+          </ng-container>
+
+          <!-- SECCIÓN 2: INFORMACIÓN ATLETAS -->
+          <ng-container *ngIf="seccion.id === 'informacionAtletas'" formGroupName="informacionAtletas">
+            
+            <!-- Ingreso de Bicicletas (Agrupado en tarjeta) -->
+            <div class="subsection-card mb-4">
+              <div class="subsection-header">
+                <h4>Ingreso de Bicicletas</h4>
+                <label class="checkbox-label">
+                  <input type="checkbox" formControlName="ingresoBicicletasNoAplica"> No aplica
+                </label>
+              </div>
+              
+              <div class="subsection-body" [class.disabled-section]="eventoForm.get('informacionAtletas.ingresoBicicletasNoAplica')?.value">
+                <div class="grid-2-cols mb-3">
+                  <div class="form-group">
+                    <label>Fecha</label>
+                    <input type="date" formControlName="ingresoFecha" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Lugar</label>
+                    <textarea formControlName="ingresoLugar" class="form-control" rows="2"></textarea>
+                  </div>
+                </div>
+                <div class="grid-2-cols">
+                  <div class="form-group">
+                    <label>Hora Inicial</label>
+                    <input type="time" formControlName="ingresoHoraInicial" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Hora Límite</label>
+                    <input type="time" formControlName="ingresoHoraLimite" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Guardaropa & Junta Previa -->
+            <div class="grid-2-cols mb-3">
+              <div class="form-group">
+                <label>Guardaropa *</label>
+                <input type="text" formControlName="guardaropa" class="form-control">
+              </div>
+              <div class="form-group">
+                <div class="label-with-checkbox">
+                  <label>Junta Previa</label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" formControlName="juntaPreviaNoAplica"> No aplica
+                  </label>
+                </div>
+                <input type="text" formControlName="juntaPrevia" class="form-control" [attr.disabled]="eventoForm.get('informacionAtletas.juntaPreviaNoAplica')?.value ? true : null">
+              </div>
+            </div>
+
+            <!-- Drafting -->
+            <div class="form-group mb-3">
+              <div class="label-with-checkbox">
+                <label>Drafting</label>
+                <label class="checkbox-label">
+                  <input type="checkbox" formControlName="draftingNoAplica"> No aplica
+                </label>
+              </div>
+              <textarea formControlName="drafting" class="form-control" rows="2" [attr.disabled]="eventoForm.get('informacionAtletas.draftingNoAplica')?.value ? true : null"></textarea>
+            </div>
+
+            <!-- Abastecimientos & Meta -->
+            <div class="grid-2-cols mb-3">
+              <div class="form-group">
+                <label>Abastecimientos *</label>
+                <textarea formControlName="abastecimientos" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Meta y Recuperación *</label>
+                <textarea formControlName="metaRecuperacion" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+
+            <!-- Jueces -->
+            <div class="form-group mb-4">
+              <label>Jueces *</label>
+              <input type="text" formControlName="jueces" class="form-control">
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Reglamento -->
+            <div class="form-group mb-4">
+              <label>Reglamento</label>
+              <app-drag-drop-upload formControlName="reglamentoFile" label="Arrastra tu archivo aquí" hint="PDF, DOC, DOCX hasta 5MB"></app-drag-drop-upload>
+              <textarea formControlName="reglamentoTexto" class="form-control mt-2" rows="3" placeholder="En caso de no tener archivo, escriba el reglamento aquí"></textarea>
+            </div>
+
+            <!-- Tiempos Máximos -->
+            <div class="form-group mb-4">
+              <div class="label-with-checkbox">
+                <label>Tiempos Máximos</label>
+                <label class="checkbox-label">
+                  <input type="checkbox" formControlName="tiemposMaximosNoAplica"> No aplica
+                </label>
+              </div>
+              <div [class.disabled-section]="eventoForm.get('informacionAtletas.tiemposMaximosNoAplica')?.value">
+                <textarea formControlName="tiemposMaximosTexto" class="form-control mb-3" rows="3"></textarea>
+                <app-drag-drop-upload formControlName="tiemposMaximosFile" label="Arrastra archivo de tiempos máximos" hint="PDF, DOC, DOCX hasta 5MB"></app-drag-drop-upload>
+              </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Guía Atleta & Carta Responsiva -->
+            <div class="grid-2-cols mb-3">
+              <div class="form-group">
+                <label>Guía de atleta</label>
+                <app-drag-drop-upload formControlName="guiaAtletaFile" label="Arrastra la guía del atleta" hint="PDF, DOC, DOCX hasta 5MB"></app-drag-drop-upload>
+              </div>
+              <div class="form-group">
+                <label>Carta Responsiva</label>
+                <app-drag-drop-upload formControlName="cartaResponsivaFile" label="Arrastra la carta responsiva" hint="PDF, DOC, DOCX hasta 5MB"></app-drag-drop-upload>
+              </div>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline" (click)="cambiarSeccion('datosGenerales')">🡠 Anterior</button>
+              <button type="button" class="btn btn-primary" (click)="cambiarSeccion('inscripciones')">Siguiente ➔</button>
+            </div>
+
+          </ng-container>
+
+          <!-- SECCIÓN 3: INSCRIPCIONES -->
+          <ng-container *ngIf="seccion.id === 'inscripciones'">
+            
+            <div formGroupName="inscripciones">
+              <div class="form-group mb-4">
+                <label>Afiliación *</label>
+                <input type="text" formControlName="afiliacion" class="form-control">
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <label>Fechas y Costos de Inscripción *</label>
+              
+              <!-- Iteramos sobre los Splits creados en la pestaña 1 -->
+              <div *ngIf="splits.controls.length === 0" class="empty-state-splits">
+                Debes crear al menos un "Split" en la sección de Datos Generales.
+              </div>
+
+              <!-- Le decimos a Angular que usaremos el FormArray de datosGenerales -->
+              <div [formGroup]="eventoForm.get('datosGenerales')">
+                <div formArrayName="categoriasDistancias">
+                  
+                  <div *ngFor="let split of splits.controls; let i = index" [formGroupName]="i" class="split-cost-card mb-3">
+                    <!-- Cabecera gris del Split -->
+                    <div class="split-cost-header">
+                      <span class="badge">Split</span>
+                      <strong>{{ split.get('nombre')?.value || 'Split sin nombre' }}</strong>
+                    </div>
+                    
+                    <!-- Iteramos sobre las fechas/costos de ESTE split -->
+                    <div class="split-cost-body" formArrayName="fechasCostos">
+                      <div *ngFor="let costo of getFechasCostos(i).controls; let c = index" [formGroupName]="c" class="costo-row">
+                        
+                        <div class="date-group">
+                          <label>Del:</label>
+                          <input type="date" formControlName="fechaInicio" class="form-control">
+                        </div>
+                        
+                        <div class="date-group">
+                          <label>Al:</label>
+                          <input type="date" formControlName="fechaFin" class="form-control">
+                        </div>
+                        
+                        <div class="cost-group">
+                          <label>Costo:</label>
+                          <div class="input-icon">
+                            <span>$</span>
+                            <input type="number" formControlName="costo" class="form-control">
+                          </div>
+                        </div>
+
+                        <button type="button" class="btn-close-red mt-2" (click)="removeFechaCosto(i, c)" *ngIf="getFechasCostos(i).length > 1">
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                      
+                      <button type="button" class="btn-add-outline" (click)="addFechaCosto(i)">+ Añadir Fecha</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div formGroupName="inscripciones">
+              <div class="grid-2-cols mb-3">
+                <div class="form-group">
+                  <label>Lugares *</label>
+                  <textarea formControlName="lugares" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Formas de Pago *</label>
+                  <textarea formControlName="formasPago" class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group mb-4">
+                <label>Notas importantes</label>
+                <textarea formControlName="notasImportantes" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline" (click)="cambiarSeccion('informacionAtletas')">🡠 Anterior</button>
+              <button type="button" class="btn btn-primary" (click)="cambiarSeccion('paquetes')">Siguiente ➔</button>
             </div>
 
           </ng-container>

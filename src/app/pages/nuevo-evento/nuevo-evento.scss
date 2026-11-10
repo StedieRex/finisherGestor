@@ -239,3 +239,171 @@
   &.btn-sm { font-size: 12px; padding: 6px 12px; }
   &.btn-lg { font-size: 14px; padding: 10px 20px; }
 }
+
+.section-divider {
+  border: none;
+  border-top: 1px solid #cbd5e1;
+  margin: 25px 0;
+  width: 100%;
+}
+
+// Tarjeta para sub-agrupaciones (ej. Ingreso de Bicicletas)
+.subsection-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+  overflow: hidden;
+
+  .subsection-header {
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h4 {
+      margin: 0;
+      font-size: 14px;
+      color: #334155;
+    }
+  }
+
+  .subsection-body {
+    padding: 15px;
+    transition: opacity 0.3s ease;
+  }
+}
+
+// Checkboxes y Etiquetas alineadas
+.label-with-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  label:first-child {
+    margin-bottom: 0; // Quitar el margen por defecto del form-group
+  }
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: normal;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #3b82f6; // Color azul de tu diseño
+  }
+}
+
+// Utilidades
+.mt-2 { margin-top: 10px; }
+.mb-4 { margin-bottom: 25px; }
+
+// Efecto visual cuando se marca "No aplica"
+.disabled-section {
+  opacity: 0.5;
+  pointer-events: none; // Impide interactuar con los inputs
+}
+
+// Estilo extra para inputs con el atributo disabled nativo
+.form-control[disabled] {
+  background-color: #f1f5f9;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+// --- Estilos para Costos por Split ---
+.empty-state-splits {
+  padding: 15px;
+  background-color: #fef3c7;
+  color: #92400e;
+  border-left: 4px solid #f59e0b;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.split-cost-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .split-cost-header {
+    background-color: #e2e8f0; // Fondo gris de la cabecera
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+    .badge {
+      background: white;
+      border: 1px solid #cbd5e1;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #64748b;
+    }
+  }
+
+  .split-cost-body {
+    padding: 15px;
+    background-color: #ffffff;
+  }
+}
+
+.costo-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #e2e8f0;
+
+  &:last-of-type { border-bottom: none; margin-bottom: 10px; padding-bottom: 0; }
+
+  .date-group, .cost-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    label { margin-bottom: 0; font-size: 13px; font-weight: 500;}
+  }
+}
+
+// Input con ícono incrustado (Para el Costo $)
+.input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+  span {
+    position: absolute;
+    left: 10px;
+    color: #64748b;
+    font-weight: bold;
+  }
+
+  .form-control {
+    padding-left: 25px; // Espacio para el signo de pesos
+    width: 120px;
+  }
+}
+
+.btn-add-outline {
+  background: transparent;
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover { background: #eff6ff; }
+}
