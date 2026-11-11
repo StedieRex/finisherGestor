@@ -1,0 +1,147 @@
+.dashboard-container {
+  padding: 30px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f4f6f9; // Fondo gris claro azulado del mockup
+  min-height: calc(100vh - 70px);
+}
+
+// --- BUSCADOR SUPERIOR ---
+.top-search-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30px;
+
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    label {
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .search-input {
+      width: 300px;
+    }
+  }
+
+  .btn-create {
+    position: absolute;
+    right: 0;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    
+    &:hover { background: #0b5ed7; }
+  }
+}
+
+// --- BARRA DE FILTROS ---
+.filters-bar {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+// Estilos globales para inputs en esta pantalla
+.form-control {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  color: #475569;
+  
+  &::placeholder { color: #94a3b8; }
+  &:focus { border-color: #3b82f6; }
+}
+
+// --- GRID Y TARJETAS ---
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.event-card {
+  background: #ffffff;
+  border-radius: 24px; // Bordes muy redondeados como en el mockup
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-image {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    background-color: #e2e8f0;
+  }
+
+  .card-content {
+    padding: 20px 25px 35px 25px; // Espaciado interno generoso
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; // Alinear elementos a la izquierda
+
+    .badge-type {
+      background-color: #0d6efd; // Azul brillante
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 20px; // Forma de píldora
+      margin-bottom: 15px;
+    }
+
+    .event-title {
+      font-size: 15px;
+      font-weight: 800; // Letra muy gruesa
+      color: #0f172a;
+      margin: 0 0 5px 0;
+      line-height: 1.3;
+    }
+
+    .event-subtitle {
+      font-size: 13px;
+      color: #475569;
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+}
