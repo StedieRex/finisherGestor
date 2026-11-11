@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* Reseteo global para evitar desbordamientos */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Elimina estrictamente cualquier scroll lateral en la app */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
