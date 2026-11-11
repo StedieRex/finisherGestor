@@ -188,9 +188,22 @@ export class NuevoEventoComponent implements OnInit {
         formasPago: ['', Validators.required],
         notasImportantes: [''] // Es independiente de las notas generales
       }),
-      paquetes: this.fb.group({}),
-      reglasNormas: this.fb.group({}),
-      informacionAdicional: this.fb.group({})
+      paquetes: this.fb.group({
+        entregaKits: this.fb.group({
+          fecha: ['', Validators.required],
+          lugar: ['', Validators.required],
+          horaInicial: ['', Validators.required],
+          horaLimite: ['', Validators.required],
+          notasImportantes: ['']
+        })
+      }),
+      reglasNormas: this.fb.group({
+        reglas: ['', Validators.required] // Basado en el asterisco de tu diseño
+      }),
+      informacionAdicional: this.fb.group({
+        hospedaje: ['', Validators.required],
+        otros: ['']
+      })
     });
   }
 

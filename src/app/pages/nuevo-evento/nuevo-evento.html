@@ -394,9 +394,81 @@
 
           </ng-container>
 
-          <!-- EL RESTO DE LAS SECCIONES SE AGREGARÁN AQUÍ DESPUÉS -->
-          <ng-container *ngIf="seccion.id !== 'datosGenerales'">
-            <p style="padding: 20px; color: #64748b;">(Campos de {{seccion.titulo}} en construcción)</p>
+          <!-- SECCIÓN 4: PAQUETES -->
+          <ng-container *ngIf="seccion.id === 'paquetes'" formGroupName="paquetes">
+            
+            <div class="subsection-card mb-4" formGroupName="entregaKits">
+              <div class="subsection-header">
+                <h4>Entrega de Kits</h4>
+              </div>
+              
+              <div class="subsection-body">
+                <div class="grid-2-cols mb-3">
+                  <div class="form-group">
+                    <label>Fecha *</label>
+                    <input type="date" formControlName="fecha" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Lugar *</label>
+                    <textarea formControlName="lugar" class="form-control" rows="2"></textarea>
+                  </div>
+                </div>
+                
+                <div class="grid-2-cols mb-3">
+                  <div class="form-group">
+                    <label>Hora Inicial *</label>
+                    <input type="time" formControlName="horaInicial" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Hora Límite *</label>
+                    <input type="time" formControlName="horaLimite" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Notas importantes</label>
+                  <textarea formControlName="notasImportantes" class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline" (click)="cambiarSeccion('inscripciones')">🡠 Anterior</button>
+              <button type="button" class="btn btn-primary" (click)="cambiarSeccion('reglasNormas')">Siguiente ➔</button>
+            </div>
+
+          </ng-container>
+
+          <!-- SECCIÓN 5: REGLAS Y NORMAS -->
+          <ng-container *ngIf="seccion.id === 'reglasNormas'" formGroupName="reglasNormas">
+            <div class="form-group mb-4">
+              <label>Reglas *</label>
+              <textarea formControlName="reglas" class="form-control" rows="12" placeholder="Escribe aquí el reglamento oficial..."></textarea>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline" (click)="cambiarSeccion('paquetes')">🡠 Anterior</button>
+              <button type="button" class="btn btn-primary" (click)="cambiarSeccion('informacionAdicional')">Siguiente ➔</button>
+            </div>
+          </ng-container>
+
+          <!-- SECCIÓN 6: INFORMACIÓN ADICIONAL -->
+          <ng-container *ngIf="seccion.id === 'informacionAdicional'" formGroupName="informacionAdicional">
+            <div class="form-group mb-4">
+              <label>Hospedaje *</label>
+              <textarea formControlName="hospedaje" class="form-control" rows="5" placeholder="Opciones de hoteles, tarifas preferenciales..."></textarea>
+            </div>
+            
+            <div class="form-group mb-4">
+              <label>Otros</label>
+              <textarea formControlName="otros" class="form-control" rows="5" placeholder="Cualquier otra información relevante..."></textarea>
+            </div>
+
+            <div class="section-actions">
+              <button type="button" class="btn btn-outline" (click)="cambiarSeccion('reglasNormas')">🡠 Anterior</button>
+              <!-- Nota: El botón final de "Crear Evento" ya lo habíamos dejado fuera del ng-container 
+                  al final del formulario para que guarde todo el form. -->
+            </div>
           </ng-container>
 
         </div>
