@@ -1,0 +1,178 @@
+.registro-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+  background-color: #f4f6f9;
+  padding: 20px;
+}
+
+.registro-card {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  height: 520px; // Ligeramente más alto para acomodar los campos extra
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+// --- COLUMNA IZQUIERDA (Imagen) ---
+.registro-image-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.image-layer {
+  flex: 5.5; // Proporción de la imagen
+  background-image: url('https://images.unsplash.com/photo-1530549387789-4c1017266635?q=80&w=800&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+}
+
+.welcome-block {
+  flex: 4.5; // Proporción del bloque azul oscuro
+  background-color: #0b1c3d; // Azul marino oscuro del diseño
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  
+  h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    
+    .highlight-yellow {
+      color: #ffc107; // Amarillo/Dorado del texto HOY
+    }
+  }
+  
+  p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #cbd5e1;
+  }
+}
+
+// --- COLUMNA DERECHA (Formulario) ---
+.registro-form-side {
+  flex: 1.1; // Ligeramente más ancho para respirar mejor
+  padding: 40px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  h2 {
+    font-size: 24px;
+    color: #0f172a;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  
+  &.full-width {
+    margin-bottom: 15px;
+  }
+
+  input, .form-control-select {
+    width: 100%;
+    padding: 14px 15px;
+    background-color: #f8fafc; // Fondo gris muy claro
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #334155;
+    outline: none;
+    transition: all 0.2s;
+    
+    &::placeholder { color: #94a3b8; }
+    
+    &:focus {
+      border-color: #3b82f6;
+      background-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+  }
+
+  // Estilo específico para el select y resetear apariencia nativa
+  .form-control-select {
+    appearance: none;
+    cursor: pointer;
+    color: #94a3b8; // Color del placeholder
+    
+    &:focus, &:valid {
+      color: #334155; // Cambia color cuando se selecciona algo
+    }
+  }
+}
+
+// Botón gris oscuro (Continuar)
+.btn-continuar {
+  width: 100%;
+  padding: 14px;
+  background-color: #475569; // Gris oscuro / Slate
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  
+  &:hover { background-color: #334155; }
+}
+
+.login-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+  margin-top: auto;
+  
+  span {
+    color: #64748b;
+    font-size: 13px;
+  }
+  
+  // Botón azul (Inicie sesión)
+  .btn-login-blue {
+    background-color: #2563eb; 
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px; // Bordes muy redondeados
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover { background-color: #1d4ed8; }
+  }
+}
+
+// Responsivo
+@media (max-width: 768px) {
+  .registro-card { max-width: 450px; flex-direction: column-reverse; height: auto; }
+  .registro-image-side { display: none; }
+  .registro-form-side { padding: 30px; }
+  .form-grid { grid-template-columns: 1fr; gap: 0; }
+}

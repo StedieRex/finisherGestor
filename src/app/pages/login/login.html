@@ -1,0 +1,47 @@
+<div class="login-page-container">
+  
+  <div class="login-card">
+    
+    <!-- Columna Izquierda: Formulario -->
+    <div class="login-form-side">
+      <h2>Inicio de sesión</h2>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+        
+        <div class="input-group">
+          <input type="email" formControlName="correo" placeholder="Correo electrónico">
+        </div>
+        
+        <div class="input-group">
+          <input type="password" formControlName="contrasena" placeholder="Contraseña">
+        </div>
+        
+        <button type="submit" class="btn-continuar">Continuar</button>
+        
+        <div class="forgot-password">
+          <a href="#">Olvidé mi contraseña</a>
+        </div>
+        
+      </form>
+      
+      <div class="register-section">
+        <span>¿No tiene una cuenta?</span>
+        <button type="button" class="btn-registrar" (click)="irARegistro()">Registrarme</button>
+      </div>
+    </div>
+    
+    <!-- Columna Derecha: Imagen y Bienvenida -->
+    <div class="login-image-side">
+      <!-- Capa de imagen (zapatillas corriendo) -->
+      <div class="image-layer"></div>
+      
+      <!-- Bloque inferior azul -->
+      <div class="welcome-block">
+        <h3>¡Bienvenido de<br>vuelta!</h3>
+        <p>Ingrese sus datos para continuar</p>
+      </div>
+    </div>
+    
+  </div>
+
+</div>

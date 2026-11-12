@@ -1,0 +1,60 @@
+<div class="registro-page-container">
+  
+  <div class="registro-card">
+    
+    <!-- Columna Izquierda: Imagen y Bienvenida -->
+    <div class="registro-image-side">
+      <div class="image-layer"></div>
+      
+      <div class="welcome-block">
+        <h3>Comience su<br>aventura <span class="highlight-yellow">HOY</span></h3>
+        <p>¡Únase a la comunidad de Finisher!</p>
+      </div>
+    </div>
+
+    <!-- Columna Derecha: Formulario -->
+    <div class="registro-form-side">
+      <h2>Cree su cuenta</h2>
+      
+      <form [formGroup]="registroForm" (ngSubmit)="crearCuenta()">
+        
+        <div class="input-group full-width">
+          <input type="text" formControlName="nombres" placeholder="Nombre(s)">
+        </div>
+        
+        <div class="form-grid">
+          <div class="input-group">
+            <input type="text" formControlName="apellidoPaterno" placeholder="Apellido paterno">
+          </div>
+          <div class="input-group">
+            <input type="text" formControlName="apellidoMaterno" placeholder="Apellido materno">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="input-group">
+            <select formControlName="genero" class="form-control-select">
+              <option value="" disabled selected hidden>Género</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+              <option value="O">Otro</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" formControlName="fechaNacimiento" placeholder="Fecha de nacimiento">
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-continuar">Continuar</button>
+        
+      </form>
+      
+      <div class="login-section">
+        <span>¿Ya tiene una cuenta?</span>
+        <button type="button" class="btn-login-blue" (click)="irALogin()">Inicie sesión</button>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
