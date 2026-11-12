@@ -225,4 +225,116 @@ export class NuevoEventoComponent implements OnInit {
       this.eventoForm.markAllAsTouched(); // Marca los campos en rojo
     }
   }
+
+  llenarDatosPrueba() {
+    // 1. Recrear el FormArray dinámico (Splits, Ramas y Costos) antes del patchValue
+    this.splits.clear();
+
+    // -- Crear Split de 15KM --
+    const split15 = this.nuevoSplit();
+    const ramas15 = split15.get('ramas') as FormArray;
+    ramas15.clear(); // Limpiamos la rama vacía por defecto
+    
+    // Rama Varonil (15KM)
+    const ramaVaronil = this.nuevaRama();
+    const catsVaronil = ramaVaronil.get('categorias') as FormArray;
+    catsVaronil.clear();
+    catsVaronil.push(this.fb.group({ nombre: 'Libre (18-39 años)' }));
+    catsVaronil.push(this.fb.group({ nombre: 'Master (40-49 años)' }));
+    ramas15.push(ramaVaronil);
+
+    // Costos para 15KM
+    const costos15 = split15.get('fechasCostos') as FormArray;
+    costos15.clear();
+    const costo1_15 = this.nuevaFechaCosto();
+    costo1_15.patchValue({ fechaInicio: '2026-05-01', fechaFin: '2026-06-30', costo: 450 });
+    const costo2_15 = this.nuevaFechaCosto();
+    costo2_15.patchValue({ fechaInicio: '2026-07-01', fechaFin: '2026-08-31', costo: 600 });
+    costos15.push(costo1_15);
+    costos15.push(costo2_15);
+
+    this.splits.push(split15);
+
+    // -- Crear Split de 30KM --
+    const split30 = this.nuevoSplit();
+    const costos30 = split30.get('fechasCostos') as FormArray;
+    costos30.clear();
+    const costo1_30 = this.nuevaFechaCosto();
+    costo1_30.patchValue({ fechaInicio: '2026-05-01', fechaFin: '2026-08-31', costo: 850 });
+    costos30.push(costo1_30);
+    
+    this.splits.push(split30);
+
+
+    // 2. Inyectar todos los valores al formulario principal mediante patchValue
+    this.eventoForm.patchValue({
+      datosGenerales: {
+        banner: 'C:\\Users\\luisb\\Desktop\\imagenes y documentos\\Banner.png',
+        thumbnail: 'C:\\temp\\eventos-pruebas\\thumbnail.jpg',
+        nombreEvento: 'CARRERA DE LOS DE CUERNAVACA 2026',
+        grupoOrganizador: 'Frente Atlético Cuernavaca',
+        tipoEvento: 'Carrera',
+        cupo: 1500,
+        fecha: '2026-09-15',
+        horaArranque: '07:00',
+        lugar: 'Plaza de Armas, Cuernavaca, Morelos',
+        ubicacion2T: 'No aplica',
+        modalidades: 'Asfalto urbano y subidas',
+        categoriasDistancias: [
+          { nombre: '15KM' }, // Valores que empatan con los splits creados arriba
+          { nombre: '30KM' }
+        ],
+        rutasFile: 'C:\\temp\\eventos-pruebas\\mapa_rutas.pdf',
+        premiosFile: 'C:\\temp\\eventos-pruebas\\tabla_premios.pdf',
+        premiacion: 'Bolsa garantizada de $50,000 MXN a repartir en las categorías libres.'
+      },
+      informacionAtletas: {
+        ingresoBicicletasNoAplica: true, // Esto activará el estilo visual deshabilitado
+        ingresoFecha: '',
+        ingresoLugar: '',
+        ingresoHoraInicial: '',
+        ingresoHoraLimite: '',
+        guardaropa: 'Carpa ubicada en zona norte, de 06:00 a 12:00 hrs.',
+        juntaPreviaNoAplica: false,
+        juntaPrevia: 'Viernes previo al evento a las 18:00 hrs por Facebook Live.',
+        draftingNoAplica: true,
+        drafting: '',
+        abastecimientos: 'Km 3, Km 7, Km 12 y Meta. Bebida isotónica y agua.',
+        metaRecuperacion: 'Carpas médicas, fisioterapia básica y kit de recuperación al cruzar el arco.',
+        jueces: 'Designados por el comité organizador local.',
+        reglamentoFile: 'C:\\temp\\eventos-pruebas\\reglamento_oficial.docx',
+        reglamentoTexto: 'En caso de lluvia severa, el evento se retrasará 1 hora.',
+        tiemposMaximosNoAplica: false,
+        tiemposMaximosTexto: 'Se cerrará la meta después de 3 horas del disparo de salida.',
+        tiemposMaximosFile: 'C:\\temp\\eventos-pruebas\\tiempos_corte.pdf',
+        guiaAtletaFile: 'C:\\temp\\eventos-pruebas\\guia_corredor_2026.pdf',
+        cartaResponsivaFile: 'C:\\temp\\eventos-pruebas\\carta_responsiva_editable.pdf'
+      },
+      inscripciones: {
+        afiliacion: 'No se requiere afiliación a ninguna federación.',
+        lugares: 'Portal en línea y tiendas deportivas afiliadas en el centro.',
+        formasPago: 'Tarjeta de Crédito, Débito y transferencia bancaria directa (SPEI).',
+        notasImportantes: 'No hay reembolsos ni transferencias de número por ningún motivo.'
+      },
+      paquetes: {
+        entregaKits: {
+          fecha: '2026-09-14',
+          lugar: 'Centro de Convenciones Cuernavaca, Salón A.',
+          horaInicial: '10:00',
+          horaLimite: '18:00',
+          notasImportantes: 'Es obligatorio llevar la carta responsiva firmada y copia de INE.'
+        }
+      },
+      reglasNormas: {
+        reglas: '1. Portar el número oficial siempre al frente.\n2. Seguir las instrucciones del staff.\n3. Prohibido recortar la ruta (habrá tapetes de cronometraje).'
+      },
+      informacionAdicional: {
+        hospedaje: 'Hotel Sede Cuernavaca Inn. Tarifas especiales usando el código: RUNCUERNA26',
+        otros: 'Contaremos con estacionamiento público a 2 cuadras del evento (tarifa preferencial de $50 pesos).'
+      }
+    });
+
+    console.log('Formulario autocompletado:', this.eventoForm.value);
+  }
+
 }

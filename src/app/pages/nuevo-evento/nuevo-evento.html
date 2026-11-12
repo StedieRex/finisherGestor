@@ -7,10 +7,16 @@
   </app-sidebar>
 
   <main class="main-content">
-    <header class="page-header">
-      <h1>Nuevo Evento Deportivo</h1>
-      <p>Completa todas las secciones para publicar tu evento. Los campos marcados con <span>*</span> son obligatorios.</p>
-    </header>
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+      <div>
+        <h1>Nuevo Evento Deportivo</h1>
+        <p>Completa todas las secciones para publicar tu evento. Los campos marcados con <span>*</span> son obligatorios.</p>
+      </div>
+      <!-- Botón de Autocompletado para Pruebas -->
+      <button type="button" class="btn btn-outline" (click)="llenarDatosPrueba()" style="border-color: #8b5cf6; color: #8b5cf6;">
+        <i class="fas fa-magic"></i> Llenar Datos de Prueba
+      </button>
+    </div>
 
     <form [formGroup]="eventoForm" (ngSubmit)="guardarEvento()" class="accordion-container">
       

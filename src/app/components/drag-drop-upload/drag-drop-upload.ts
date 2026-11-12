@@ -86,7 +86,31 @@ export class DragDropUploadComponent implements ControlValueAccessor {
 
   // --- Métodos de ControlValueAccessor ---
   writeValue(value: any): void {
-    if (value === null) {
+    if (value) {
+      // 1. Si es un archivo real (subido manualmente por ti)
+      if (value instanceof File) {
+        this.file = value;
+        
+        // Recrear la previsualización si es imagen
+        if (value.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            this.previewUrl = reader.result;
+          };
+          reader.readAsDataURL(value);
+        } else {
+          this.previewUrl = null;
+        }
+      } 
+      // 2. Si es una ruta estática (del botón "Llenar Datos de Prueba")
+      else if (typeof value === 'string') {
+        const nombreExtraido = value.split('\\').pop()?.split('/').pop() || value;
+        // Simulamos un objeto File vacío para que tu HTML no rompa si busca "{{ file.name }}"
+        this.file = new File([''], nombreExtraido);
+        this.previewUrl = null; 
+      }
+    } else {
+      // 3. Tu lógica original (formulario vacío o reseteado)
       this.file = null;
       this.previewUrl = null;
     }
