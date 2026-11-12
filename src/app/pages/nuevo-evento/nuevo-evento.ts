@@ -227,16 +227,20 @@ export class NuevoEventoComponent implements OnInit {
   }
 
   llenarDatosPrueba() {
-    // 1. Recrear el FormArray dinámico (Splits, Ramas y Costos) antes del patchValue
+    // 1. Recrear el FormArray dinámico (Splits, Ramas y Costos)
     this.splits.clear();
 
     // -- Crear Split de 15KM --
     const split15 = this.nuevoSplit();
+    split15.patchValue({ nombre: '15KM' }); // Asignamos nombre directo al split
+    
     const ramas15 = split15.get('ramas') as FormArray;
-    ramas15.clear(); // Limpiamos la rama vacía por defecto
+    ramas15.clear(); 
     
     // Rama Varonil (15KM)
     const ramaVaronil = this.nuevaRama();
+    ramaVaronil.patchValue({ nombre: 'Varonil' }); // <-- CORRECCIÓN: Faltaba este campo obligatorio
+    
     const catsVaronil = ramaVaronil.get('categorias') as FormArray;
     catsVaronil.clear();
     catsVaronil.push(this.fb.group({ nombre: 'Libre (18-39 años)' }));
@@ -257,6 +261,8 @@ export class NuevoEventoComponent implements OnInit {
 
     // -- Crear Split de 30KM --
     const split30 = this.nuevoSplit();
+    split30.patchValue({ nombre: '30KM' }); // Asignamos nombre directo al split
+    
     const costos30 = split30.get('fechasCostos') as FormArray;
     costos30.clear();
     const costo1_30 = this.nuevaFechaCosto();
@@ -265,11 +271,10 @@ export class NuevoEventoComponent implements OnInit {
     
     this.splits.push(split30);
 
-
-    // 2. Inyectar todos los valores al formulario principal mediante patchValue
+    // 2. Inyectar todos los valores (Nombres emparejados exactamente con tu HTML)
     this.eventoForm.patchValue({
       datosGenerales: {
-        banner: 'C:\\Users\\luisb\\Desktop\\imagenes y documentos\\Banner.png',
+        banner: 'C:\\temp\\eventos-pruebas\\banner-principal.png',
         thumbnail: 'C:\\temp\\eventos-pruebas\\thumbnail.jpg',
         nombreEvento: 'CARRERA DE LOS DE CUERNAVACA 2026',
         grupoOrganizador: 'Frente Atlético Cuernavaca',
@@ -278,18 +283,16 @@ export class NuevoEventoComponent implements OnInit {
         fecha: '2026-09-15',
         horaArranque: '07:00',
         lugar: 'Plaza de Armas, Cuernavaca, Morelos',
-        ubicacion2T: 'No aplica',
+        ubicacionZt: 'No aplica', // Corregido
         modalidades: 'Asfalto urbano y subidas',
-        categoriasDistancias: [
-          { nombre: '15KM' }, // Valores que empatan con los splits creados arriba
-          { nombre: '30KM' }
-        ],
+        distanciasFile: 'C:\\temp\\eventos-pruebas\\tabla_distancias.pdf', // Corregido
         rutasFile: 'C:\\temp\\eventos-pruebas\\mapa_rutas.pdf',
-        premiosFile: 'C:\\temp\\eventos-pruebas\\tabla_premios.pdf',
-        premiacion: 'Bolsa garantizada de $50,000 MXN a repartir en las categorías libres.'
+        premiacion: 'Bolsa garantizada de $50,000 MXN a repartir en las categorías libres.',
+        premiacionFile: 'C:\\temp\\eventos-pruebas\\tabla_premios.pdf', // Corregido
+        notasImportantes: 'Llegar 1 hora antes al bloque de salida.' // Añadido
       },
       informacionAtletas: {
-        ingresoBicicletasNoAplica: true, // Esto activará el estilo visual deshabilitado
+        ingresoBicicletasNoAplica: true, 
         ingresoFecha: '',
         ingresoLugar: '',
         ingresoHoraInicial: '',

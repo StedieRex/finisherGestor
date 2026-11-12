@@ -1,7 +1,124 @@
 {
-  "eventos": [],
+  "eventos": [
+    {
+      "datosGenerales": {
+        "banner": "C:\\temp\\eventos-pruebas\\banner-principal.png",
+        "thumbnail": "C:\\temp\\eventos-pruebas\\thumbnail.jpg",
+        "nombreEvento": "CARRERA DE LOS DE CUERNAVACA 2026",
+        "grupoOrganizador": "Frente Atlético Cuernavaca",
+        "tipoEvento": "Carrera",
+        "cupo": 1500,
+        "fecha": "2026-09-15",
+        "horaArranque": "07:00",
+        "lugar": "Plaza de Armas, Cuernavaca, Morelos",
+        "ubicacionZt": "No aplica",
+        "modalidades": "Asfalto urbano y subidas",
+        "categoriasDistancias": [
+          {
+            "nombre": "15KM",
+            "ramas": [
+              {
+                "nombre": "Varonil",
+                "categorias": [
+                  {
+                    "nombre": "Libre (18-39 años)"
+                  },
+                  {
+                    "nombre": "Master (40-49 años)"
+                  }
+                ]
+              }
+            ],
+            "fechasCostos": [
+              {
+                "fechaInicio": "2026-05-01",
+                "fechaFin": "2026-06-30",
+                "costo": 450
+              },
+              {
+                "fechaInicio": "2026-07-01",
+                "fechaFin": "2026-08-31",
+                "costo": 600
+              }
+            ]
+          },
+          {
+            "nombre": "30KM",
+            "ramas": [],
+            "fechasCostos": [
+              {
+                "fechaInicio": "2026-05-01",
+                "fechaFin": "2026-08-31",
+                "costo": 850
+              }
+            ]
+          }
+        ],
+        "distanciasFile": "C:\\temp\\eventos-pruebas\\tabla_distancias.pdf",
+        "rutasFile": "C:\\temp\\eventos-pruebas\\mapa_rutas.pdf",
+        "premiacion": "Bolsa garantizada de $50,000 MXN a repartir en las categorías libres.",
+        "premiacionFile": "C:\\temp\\eventos-pruebas\\tabla_premios.pdf",
+        "notasImportantes": "Llegar 1 hora antes al bloque de salida."
+      },
+      "informacionAtletas": {
+        "ingresoBicicletasNoAplica": true,
+        "ingresoFecha": "",
+        "ingresoLugar": "",
+        "ingresoHoraInicial": "",
+        "ingresoHoraLimite": "",
+        "guardaropa": "Carpa ubicada en zona norte, de 06:00 a 12:00 hrs.",
+        "juntaPreviaNoAplica": false,
+        "juntaPrevia": "Viernes previo al evento a las 18:00 hrs por Facebook Live.",
+        "draftingNoAplica": true,
+        "drafting": "",
+        "abastecimientos": "Km 3, Km 7, Km 12 y Meta. Bebida isotónica y agua.",
+        "metaRecuperacion": "Carpas médicas, fisioterapia básica y kit de recuperación al cruzar el arco.",
+        "jueces": "Designados por el comité organizador local.",
+        "reglamentoFile": "C:\\temp\\eventos-pruebas\\reglamento_oficial.docx",
+        "reglamentoTexto": "En caso de lluvia severa, el evento se retrasará 1 hora.",
+        "tiemposMaximosNoAplica": false,
+        "tiemposMaximosTexto": "Se cerrará la meta después de 3 horas del disparo de salida.",
+        "tiemposMaximosFile": "C:\\temp\\eventos-pruebas\\tiempos_corte.pdf",
+        "guiaAtletaFile": "C:\\temp\\eventos-pruebas\\guia_corredor_2026.pdf",
+        "cartaResponsivaFile": "C:\\temp\\eventos-pruebas\\carta_responsiva_editable.pdf"
+      },
+      "inscripciones": {
+        "afiliacion": "No se requiere afiliación a ninguna federación.",
+        "lugares": "Portal en línea y tiendas deportivas afiliadas en el centro.",
+        "formasPago": "Tarjeta de Crédito, Débito y transferencia bancaria directa (SPEI).",
+        "notasImportantes": "No hay reembolsos ni transferencias de número por ningún motivo."
+      },
+      "paquetes": {
+        "entregaKits": {
+          "fecha": "2026-09-14",
+          "lugar": "Centro de Convenciones Cuernavaca, Salón A.",
+          "horaInicial": "10:00",
+          "horaLimite": "18:00",
+          "notasImportantes": "Es obligatorio llevar la carta responsiva firmada y copia de INE."
+        }
+      },
+      "reglasNormas": {
+        "reglas": "1. Portar el número oficial siempre al frente.\n2. Seguir las instrucciones del staff.\n3. Prohibido recortar la ruta (habrá tapetes de cronometraje)."
+      },
+      "informacionAdicional": {
+        "hospedaje": "Hotel Sede Cuernavaca Inn. Tarifas especiales usando el código: RUNCUERNA26",
+        "otros": "Contaremos con estacionamiento público a 2 cuadras del evento (tarifa preferencial de $50 pesos)."
+      },
+      "id": "v4HzTsTWpDo"
+    }
+  ],
   "catalogos": {
-    "tiposEvento": ["Carrera", "Triatlón", "Ciclismo", "Natación"],
-    "modalidades": ["Presencial", "Virtual", "Híbrido"]
-  }
+    "tiposEvento": [
+      "Carrera",
+      "Triatlón",
+      "Ciclismo",
+      "Natación"
+    ],
+    "modalidades": [
+      "Presencial",
+      "Virtual",
+      "Híbrido"
+    ]
+  },
+  "$schema": "./node_modules/json-server/schema.json"
 }
