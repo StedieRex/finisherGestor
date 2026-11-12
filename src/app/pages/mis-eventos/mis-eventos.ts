@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { EventoService } from '../../services/evento.service';
@@ -13,7 +13,11 @@ import { EventoService } from '../../services/evento.service';
 export class MisEventosComponent implements OnInit {
   eventos: any[] = [];
 
-  constructor(private eventoService: EventoService, private router: Router) {}
+  constructor(
+    private eventoService: EventoService, 
+    private router: Router,
+    private cdr: ChangeDetectorRef // <-- Inyéctalo aquí
+  ) {}
 
   ngOnInit() {
     this.cargarEventos();
@@ -21,7 +25,13 @@ export class MisEventosComponent implements OnInit {
 
   cargarEventos() {
     this.eventoService.getEventos().subscribe({
-      next: (data) => this.eventos = data,
+      next: (data) => {
+        this.eventos = data;
+        console.log('Eventos recibidos de db.json:', this.eventos);
+        
+        // FUEZA A ANGULAR A DIBUJAR LA PANTALLA
+        this.cdr.detectChanges(); 
+      },
       error: (err) => console.error('Error al cargar eventos', err)
     });
   }
@@ -31,8 +41,7 @@ export class MisEventosComponent implements OnInit {
   }
 
   editarEvento(evento: any) {
-    // Más adelante aquí puedes pasar el ID del evento en la URL, ej: ['/editar-evento', evento.id]
     console.log('Editando evento:', evento);
-    alert('Función de edición en construcción para: ' + evento.datosGenerales?.nombreEvento);
+    alert('Función de edición en construcción');
   }
 }

@@ -2,10 +2,10 @@
   "eventos": [
     {
       "datosGenerales": {
-        "banner": "C:\\temp\\eventos-pruebas\\banner-principal.png",
-        "thumbnail": "C:\\temp\\eventos-pruebas\\thumbnail.jpg",
-        "nombreEvento": "CARRERA DE LOS DE CUERNAVACA 2026",
-        "grupoOrganizador": "Frente Atlético Cuernavaca",
+        "banner": "/assets/Banner.png",
+        "thumbnail": "/assets/Banner.png",
+        "nombreEvento": "CARRERA DE LOS DE CUERNAVACA 2027",
+        "grupoOrganizador": "Frente Atlético Puebla",
         "tipoEvento": "Carrera",
         "cupo": 1500,
         "fecha": "2026-09-15",
