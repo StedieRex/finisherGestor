@@ -1,35 +1,47 @@
 .sidebar-container {
   width: 250px;
-  background-color: #f8fafc;
-  border-right: 1px solid #e2e8f0;
-  height: 100vh;
+  background-color: #ffffff;
+  border: 2px solid #3b82f6;
+  height: max-content;
+  min-height: 400px;
   position: sticky;
-  top: 0;
-  padding: 20px 0;
+  
+  /* Se suma la altura del header (70px) + el margen deseado (20px) */
+  top: 90px; 
+  margin: 20px 0 20px 20px;
+  padding: 0;
+}
 
-  .nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 20px 25px;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 500;
+  border-bottom: 1px solid #cbd5e1; /* Línea separadora */
+  transition: all 0.2s ease;
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
   }
 
-  .nav-item {
-    padding: 15px 20px;
-    cursor: pointer;
-    color: #475569;
-    font-weight: 500;
-    border-left: 4px solid transparent;
-    transition: all 0.2s ease;
+  &:hover {
+    background-color: #f8fafc;
+  }
 
-    &:hover {
-      background-color: #f1f5f9;
-    }
+  &.active {
+    background-color: #fef9c3; /* Amarillo claro */
+    color: #334155;
+  }
 
-    &.active {
-      background-color: #fff;
-      color: #1e40af;
-      border-left-color: #1e40af;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
+  .nav-text {
+    display: flex;
+    gap: 8px;
   }
 }

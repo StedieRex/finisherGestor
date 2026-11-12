@@ -1,42 +1,44 @@
 .layout-wrapper {
   display: flex;
   min-height: 100vh;
-  background-color: #f1f5f9;
+  background-color: #f4f6f9;
 }
 
 .main-content {
   flex: 1;
-  padding: 40px;
-  max-width: 1000px;
+  padding: 20px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .page-header {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   h1 {
-    font-size: 24px;
-    color: #1e293b;
-    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e293b; /* Azul marino oscuro */
+    margin-bottom: 8px;
   }
   p {
     color: #64748b;
+    font-size: 14px;
     span { color: #ef4444; }
   }
 }
 
 .accordion-card {
-  background: #e2e8f0;
+  background: #ffffff;
   border-radius: 8px;
   margin-bottom: 15px;
+  border: 1px solid #cbd5e1; /* Borde de toda la tarjeta */
   overflow: hidden;
-  transition: all 0.3s ease;
-
+  
   &.active {
-    background: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     
     .accordion-header {
-      border-bottom: 1px solid #f1f5f9;
-      background: #f8fafc; // Un tono más claro para el encabezado activo
+      background: #e2e8f0; /* Fondo gris para la cabecera activa */
+      border-bottom: 1px solid #cbd5e1;
     }
   }
 }
@@ -45,8 +47,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  padding: 12px 20px;
   cursor: pointer;
+  background: #f1f5f9; 
 
   .header-title {
     display: flex;
@@ -54,21 +57,21 @@
     gap: 15px;
     
     i {
-      font-size: 20px;
-      color: #3b82f6;
-    }
-    
-    h3 {
-      margin: 0;
       font-size: 16px;
-      color: #1e293b;
+      background: #2563eb;
+      color: white;
+      border-radius: 4px;
+      
+      /* Reemplaza el padding por dimensiones exactas y centrado flex */
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    p {
-      margin: 0;
-      font-size: 12px;
-      color: #64748b;
-    }
+    h3 { margin: 0; font-size: 18px; font-weight: 500; color: #1e293b; }
+    p { margin: 0; font-size: 12px; color: #64748b; }
   }
 }
 
@@ -96,10 +99,16 @@
     padding: 10px 12px;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
+    width: 100%;
+    color: #334155;
+    transition: all 0.2s;
     
-    &:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2); }
+    &:focus { 
+      border-color: #3b82f6; 
+      background-color: #eff6ff; /* Tono azul claro al hacer foco */
+    }
   }
 }
 
@@ -146,33 +155,27 @@
 
 // SPLIT (Azul oscuro)
 .split-card {
-  border: 1px solid #c2d1e0;
-  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
   background-color: #f8fafc;
   overflow: hidden;
 
   .split-header {
-    background-color: #244199; // Azul del diseño
-    padding: 10px 15px;
+    background-color: #1e3a8a; /* Azul muy oscuro para la barra */
+    padding: 8px 15px;
     display: flex;
     align-items: center;
     gap: 15px;
 
-    .badge-split { color: #f59e0b; font-weight: bold; font-size: 13px; }
+    .badge-split { color: #facc15; font-weight: bold; font-size: 12px; } /* Amarillo brillante */
     
     .dark-input {
-      background: #1e3680;
-      border: 1px solid #192d6b;
+      background: #1e40af;
+      border: 1px solid #1e3a8a;
       color: white;
-      &::placeholder { color: #8ea4e6; }
+      &::placeholder { color: #93c5fd; }
+      &:focus { background: #1d4ed8; border-color: #60a5fa; }
     }
-  }
-
-  .split-body {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
   }
 }
 
@@ -228,16 +231,17 @@
   background: #2563eb;
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 8px 16px;
-  font-size: 13px;
+  border-radius: 20px; /* Bordes muy redondeados (píldora) */
+  padding: 6px 16px;
+  font-size: 12px;
   cursor: pointer;
   align-self: flex-start;
   transition: background 0.2s;
+  margin-top: 5px;
 
   &:hover { background: #1d4ed8; }
-  &.btn-sm { font-size: 12px; padding: 6px 12px; }
-  &.btn-lg { font-size: 14px; padding: 10px 20px; }
+  &.btn-sm { font-size: 11px; padding: 5px 12px; }
+  &.btn-lg { font-size: 13px; padding: 8px 20px; }
 }
 
 .section-divider {
