@@ -38,22 +38,60 @@
   </div>
 
   <!-- Cuadrícula de Eventos -->
-  <div class="events-grid">
-    
-    <div class="event-card" *ngFor="let evento of eventos" (click)="editarEvento(evento)">
-      
-      <div class="card-image" 
-           [style.background-image]="'url(' + (evento.datosGenerales?.banner || 'https://placehold.co/600x300/333/666?text=FOTO+EVENTO') + ')'">
-      </div>
-      
-      <div class="card-content">
-        <span class="badge-type">{{ evento.datosGenerales?.tipoEvento || 'Sin tipo' }}</span>
+  <div class="dashboard-container">
+
+    <div class="events-grid">
+      @for (evento of eventos; track evento.id) {
         
-        <!-- Los paréntesis aseguran que el uppercase no rompa la vista si el nombre viene vacío -->
-        <h3 class="event-title">{{ (evento.datosGenerales?.nombreEvento || 'EVENTO SIN NOMBRE') | uppercase }}</h3>
-        <p class="event-subtitle">{{ (evento.datosGenerales?.grupoOrganizador || 'SIN ORGANIZADOR') | uppercase }}</p>
-      </div>
-      
+        <div class="slide-card-container">
+          <div class="slide-track" [class.is-slid]="tarjetaAbiertaId === evento.id">
+            
+            <!-- CARA 1: PRINCIPAL -->
+            <div class="slide-face" (click)="deslizarTarjeta(evento.id)">
+              <!-- Imagen recuperada -->
+              <div class="card-image" 
+                  [ngStyle]="{'background-image': 'url(' + (evento.datosGenerales?.banner || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIh9W3lKbZcFD1w4DGtN5zY6TYCcYoik99x2bV-6XrxkPhjsbTytzGoTc&s=10') + ')'}">
+              </div>
+              
+              <div class="card-content">
+                <span class="badge-type">{{ evento.datosGenerales?.tipoEvento || 'Carrera' }}</span>
+                <h3 class="event-title">{{ (evento.datosGenerales?.nombreEvento || 'EVENTO SIN NOMBRE') | uppercase }}</h3>
+                <p class="event-subtitle">{{ (evento.datosGenerales?.grupoOrganizador || 'SIN ORGANIZADOR') | uppercase }}</p>
+              </div>
+            </div>
+
+            <!-- CARA 2: MENÚ DE ACCIONES -->
+            <div class="slide-face back-content-wrapper">
+              <div class="card-image" 
+                  [ngStyle]="{'background-image': 'url(' + (evento.datosGenerales?.banner || '/assets/Banner.png') + ')'}">
+              </div>
+              
+              <div class="card-content back-content">
+                <div class="back-header">
+                  <button class="btn-icon-back" (click)="deslizarTarjeta(null, $event)" title="Volver">
+                    <i class="fas fa-arrow-left"></i>
+                  </button>
+                  <span class="back-title">Acciones</span>
+                </div>
+                
+                <div class="action-buttons-grid">
+                  <button class="btn-action btn-blue" (click)="editar(evento, $event)">Editar</button>
+                  <button class="btn-action btn-red" (click)="eliminar(evento, $event)">Eliminar</button>
+                  <button class="btn-action btn-outline" (click)="publicar(evento, $event)">Publicar</button>
+                  <button class="btn-action btn-green" (click)="participar(evento, $event)">Participar</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      } @empty {
+        <div class="empty-state">
+          <h3>No hay eventos creados todavía.</h3>
+          <p>Da clic en "+ Crear Nuevo Evento" para publicar el primero.</p>
+        </div>
+      }
     </div>
 
   </div>

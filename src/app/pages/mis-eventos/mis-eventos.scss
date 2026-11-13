@@ -1,9 +1,91 @@
+// --- 1. LAYOUT PRINCIPAL (Resuelve el problema de la esquina) ---
 .dashboard-container {
-  padding: 30px 40px;
+  padding: 40px;
   max-width: 1200px;
-  margin: 0 auto;
-  background-color: #f4f6f9; // Fondo gris claro azulado del mockup
+  margin: 0 auto; // Esto centra el contenido en la pantalla
   min-height: calc(100vh - 70px);
+  background-color: #f4f6f9;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+
+  h1 { font-size: 28px; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+  p { color: #64748b; font-size: 14px; margin: 0; }
+  
+  .btn-primary {
+    background: #2563eb;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    &:hover { background: #1d4ed8; }
+  }
+}
+
+// --- 2. CUADRÍCULA Y TARJETA BASE ---
+.events-grid {
+  display: grid;
+  // Crea columnas responsivas automáticas (Mínimo 320px de ancho por tarjeta)
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px; 
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 40px;
+  text-align: center;
+  color: #64748b;
+  background: white;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+}
+
+// --- 3. IMAGEN Y TEXTOS RECUPERADOS ---
+.card-image {
+  width: 100%;
+  height: 180px; // Altura fija para que la imagen se vea
+  background-color: #e2e8f0; // Color de respaldo
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.badge-type {
+  background: #2563eb;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  align-self: flex-start;
+  margin-bottom: 12px;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 5px 0;
+  line-height: 1.2;
+}
+
+.event-subtitle {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
 }
 
 // --- BUSCADOR SUPERIOR ---
@@ -144,4 +226,99 @@
       font-weight: 400;
     }
   }
+}
+
+// --- EFECTO SLIDER HORIZONTAL CON CLIC ---
+
+.slide-card-container {
+  width: 100%;
+  overflow: hidden; // Esconde la segunda cara hasta que se desliza
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s ease;
+
+  &:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+}
+
+.slide-track {
+  display: flex;
+  width: 200%; // Ocupa el doble de espacio (100% cara frontal, 100% cara trasera)
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+  &.is-slid {
+    // Al deslizarse el 50% de sí mismo, revela exactamente la segunda mitad
+    transform: translateX(-50%); 
+  }
+}
+
+.slide-face {
+  width: 50%; // Cada cara mide exactamente el 100% de la tarjeta visual
+  display: flex;
+  flex-direction: column;
+  
+  &:first-child { cursor: pointer; } // Solo la frontal tiene puntero de clic
+}
+
+// --- INTERFAZ TRASERA (Idéntica a la 3D) ---
+.back-content-wrapper {
+  cursor: default;
+}
+
+.back-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px 20px;
+}
+
+.back-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 10px;
+
+  .btn-icon-back {
+    background: #f1f5f9;
+    border: none;
+    color: #475569;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover { background: #e2e8f0; color: #0f172a; }
+  }
+
+  .back-title { font-size: 14px; font-weight: 600; color: #334155; }
+}
+
+// Cuadrícula de botones interactivos
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 10px;
+}
+
+.btn-action {
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s, background 0.2s;
+
+  &:active { transform: scale(0.96); }
+
+  &.btn-blue { background: #2563eb; color: white; &:hover { background: #1d4ed8; } }
+  &.btn-red { background: #fee2e2; color: #ef4444; &:hover { background: #fca5a5; color: white; } }
+  &.btn-outline { background: transparent; border: 1px solid #cbd5e1; color: #475569; &:hover { background: #f8fafc; border-color: #94a3b8; } }
+  &.btn-green { background: #10b981; color: white; &:hover { background: #059669; } }
 }

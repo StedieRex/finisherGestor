@@ -12,11 +12,14 @@ import { EventoService } from '../../services/evento.service';
 })
 export class MisEventosComponent implements OnInit {
   eventos: any[] = [];
+  
+  // Solo necesitamos esta variable para saber qué tarjeta está deslizada
+  tarjetaAbiertaId: string | null = null; 
 
   constructor(
     private eventoService: EventoService, 
     private router: Router,
-    private cdr: ChangeDetectorRef // <-- Inyéctalo aquí
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -27,21 +30,41 @@ export class MisEventosComponent implements OnInit {
     this.eventoService.getEventos().subscribe({
       next: (data) => {
         this.eventos = data;
-        console.log('Eventos recibidos de db.json:', this.eventos);
-        
-        // FUEZA A ANGULAR A DIBUJAR LA PANTALLA
         this.cdr.detectChanges(); 
       },
-      error: (err) => console.error('Error al cargar eventos', err)
+      error: (err) => console.error('Error', err)
     });
   }
 
-  crearNuevoEvento() {
-    this.router.navigate(['/nuevo-evento']);
+  crearNuevoEvento() { this.router.navigate(['/nuevo-evento']); }
+
+  // --- LÓGICA DE CLIC PARA DESLIZAR ---
+  deslizarTarjeta(id: string | null, event?: Event) {
+    if (event) event.stopPropagation(); // Evita clics duplicados
+    this.tarjetaAbiertaId = this.tarjetaAbiertaId === id ? null : id;
   }
 
-  editarEvento(evento: any) {
-    console.log('Editando evento:', evento);
-    alert('Función de edición en construcción');
+  // --- BOTONES DE ACCIÓN ---
+  editar(evento: any, event: Event) {
+    event.stopPropagation();
+    console.log('Editando:', evento);
+    alert('Abriendo editor...');
+  }
+
+  eliminar(evento: any, event: Event) {
+    event.stopPropagation();
+    if(confirm('¿Estás seguro de eliminar este evento?')) {
+      console.log('Eliminando:', evento.id);
+    }
+  }
+
+  publicar(evento: any, event: Event) {
+    event.stopPropagation();
+    alert('Evento publicado con éxito.');
+  }
+
+  participar(evento: any, event: Event) {
+    event.stopPropagation();
+    alert('Redirigiendo a la vista de atleta...');
   }
 }
